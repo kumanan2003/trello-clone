@@ -1,0 +1,107 @@
+-- CreateEnum
+CREATE TYPE "public"."ACTION" AS ENUM ('CREATE', 'UPDATE', 'DELETE');
+
+-- CreateEnum
+CREATE TYPE "public"."ENTITY_TYPE" AS ENUM ('BOARD', 'LIST', 'CARD');
+
+-- CreateTable
+CREATE TABLE "public"."Board" (
+    "id" TEXT NOT NULL,
+    "orgId" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "imageId" TEXT NOT NULL,
+    "imageThunbUrl" TEXT NOT NULL,
+    "imageFullUrl" TEXT NOT NULL,
+    "imageUserName" TEXT NOT NULL,
+    "imageLinkHTML" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Board_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."List" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "order" INTEGER NOT NULL,
+    "boardId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "List_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."Card" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "order" INTEGER NOT NULL,
+    "description" TEXT,
+    "listId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Card_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."AuditLog" (
+    "id" TEXT NOT NULL,
+    "orgId" TEXT NOT NULL,
+    "action" "public"."ACTION" NOT NULL,
+    "entityId" TEXT NOT NULL,
+    "entityType" "public"."ENTITY_TYPE" NOT NULL,
+    "entityTitle" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "userImage" TEXT NOT NULL,
+    "userName" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "AuditLog_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."OrgLimit" (
+    "id" TEXT NOT NULL,
+    "orgId" TEXT NOT NULL,
+    "count" INTEGER NOT NULL DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "OrgLimit_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."OrgSubscription" (
+    "id" TEXT NOT NULL,
+    "orgId" TEXT NOT NULL,
+    "stripe_customer_id" TEXT,
+    "stripe_subscription_id" TEXT,
+    "stripe_price_id" TEXT,
+    "stripe_current_period_end" TIMESTAMP(3),
+
+    CONSTRAINT "OrgSubscription_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE INDEX "List_boardId_idx" ON "public"."List"("boardId");
+
+-- CreateIndex
+CREATE INDEX "Card_listId_idx" ON "public"."Card"("listId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "OrgLimit_orgId_key" ON "public"."OrgLimit"("orgId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "OrgSubscription_orgId_key" ON "public"."OrgSubscription"("orgId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "OrgSubscription_stripe_customer_id_key" ON "public"."OrgSubscription"("stripe_customer_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "OrgSubscription_stripe_subscription_id_key" ON "public"."OrgSubscription"("stripe_subscription_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "OrgSubscription_stripe_price_id_key" ON "public"."OrgSubscription"("stripe_price_id");
