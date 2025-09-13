@@ -9,11 +9,11 @@
     This is a full-stack project exercise using NEXT.JS as the framework<br> refer to the video of code with Antonio
     <br/>
     <br/>
-    <a href="https://trello-clone-beryl-nine.vercel.app/">View Demo</a>
+    <a href="/">View Demo</a>
     .
-    <a href="https://github.com/athenacheng15/trello-clone/issues">Report Bug</a>
+    <a href="https://github.com/kumanan2003/trello-clone/issues">Report Bug</a>
     .
-    <a href="https://github.com/athenacheng15/trello-clone/issues">Request Feature</a>
+    <a href="https://github.com/kumanan2003/trello-clone/issues">Request Feature</a>
   </p>
 </div>
 <hr>
@@ -91,9 +91,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 <h2 align="left">🔍&nbsp Connect With Me :</h2>
 <div align="left">
-  <a href="https://www.linkedin.com/in/yuchuncheng-athena/" target="_blank">
+  <a href="https://www.linkedin.com/in/kumanank14/" target="_blank">
     <img src="https://img.shields.io/static/v1?message=Yu-Chun%20Cheng&logo=linkedin&label=&color=333333&logoColor=white&labelColor=0077B5&style=for-the-badge" height="35" alt="linkedin logo"  />
   </a>
+  <a href="kumanan637@gmail.com" target="_blank">
   <img src="https://img.shields.io/static/v1?message=athenachengyc15&logo=gmail&label=&color=333333&logoColor=white&labelColor=D14836&style=for-the-badge" height="35" alt="gmail logo"  />
-  <img src="https://img.shields.io/static/v1?message=yuchun_cheng&logo=discord&label=&color=333333&logoColor=white&labelColor=5865F2&style=for-the-badge" height="35" alt="discord logo"  />
+  </a>
 </div>
